@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>PDFtoAudio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
 <body>
-<h1>Convert PDF to Audio</h1>
+<!--Header-->
+<br>
+<h1 align="center"> PDF to Audio Converter</h1>
+<!--Header End-->
+<div class="container">
+    <br>
+    <br>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-info" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    <br>
+<!--    The field enctype allow to us upload files trough this form-->
+  <form align="center" method="POST" enctype="multipart/form-data" >
+      {{ form.hidden_tag()}}
+      {{form.file()}}
+      {{form.submit()}}
+  </form>
+    <br>
+    <form align="center"  method="GET" >
+        {{ form2.hidden_tag()}}
+        {{ form2.convert()}}
+    </form>
+    <p align="center">{{ path }}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>
