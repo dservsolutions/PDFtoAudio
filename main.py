@@ -42,6 +42,7 @@ def home():
         is_password_protected()
     return render_template('index.html', form=form, form2=form2)
 
+#Check if the PDF is Password Protected
 def is_password_protected():
     doc = fitz.Document(upload_paths['latest'])
     if doc.needs_pass:
@@ -49,6 +50,7 @@ def is_password_protected():
     else:
         flash(f"The file doesn't need a pass. ")
 
+# Check if the function is encrypted
 def is_pdf_encrypted():
     doc = fitz.Document(upload_paths['latest'])
     if doc.metadata['encryption'] is not None:
@@ -56,6 +58,7 @@ def is_pdf_encrypted():
     else:
         flash("The file is not encrypted")
 
+# Extracting the text from the PDF
 def extract_text():
     text = ""
     if request.method == "POST":
@@ -67,6 +70,7 @@ def extract_text():
                 text += pages_text
     return text
 
+# Converting to Audio via TTS
 @app.route('/convert', methods=['GET', 'POST'])
 def convert():
     text = extract_text()
