@@ -1,19 +1,15 @@
-from importlib.metadata import metadata
-from wsgiref.handlers import read_environ
-
 import PyPDF2
 import os
 import pyttsx3
 import fitz
-from flask import Flask, render_template, flash, request, url_for, redirect
+from flask import Flask, render_template, flash, request
 from flask_wtf import FlaskForm
-from requests import session
 from wtforms import FileField, SubmitField
 from werkzeug.utils import secure_filename
 from wtforms.validators import InputRequired
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'supersecretkey'
+app.config['SECRET_KEY'] = 'A1B2C3D4E5F3'
 app.config['UPLOAD_FOLDER'] = 'static/files'
 upload_paths = {}
 

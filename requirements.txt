@@ -3,6 +3,7 @@ requests
 pyttsx3~=2.98
 PyPDF2
 PyMuPDF
+fitz
 blinker
 click
 colorama
