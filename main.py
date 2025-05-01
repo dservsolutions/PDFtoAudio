@@ -1,4 +1,4 @@
-from importlib.metadata import pass_none, metadata
+from importlib.metadata import metadata
 from wsgiref.handlers import read_environ
 
 import PyPDF2
