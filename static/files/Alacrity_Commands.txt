@@ -1,4 +1,0 @@
-Alacrity New Window
-Ctrl-P Panel Mode
-N - new panel
-Move Left or Right - Holding up Alt+Left or Right
