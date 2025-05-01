@@ -1,7 +1,7 @@
 from importlib.metadata import pass_none
 import PyPDF2
 import pyttsx3
-from flask import Flask, render_template, flash, request, url_for
+from flask import Flask, render_template, flash, request, url_for, redirect
 from flask_wtf import FlaskForm
 from requests import session
 from wtforms import FileField, SubmitField
@@ -44,22 +44,21 @@ def home():
         filename = secure_filename(file.filename)
         save_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'], filename) # Then save the file
         file.save(save_path)
-        #Store in session
+
+        #Store variable in session
         upload_paths['latest'] = save_path
 
-        flash("File uploaded successfully, please proceed to convert it.  ")
+        flash(f"File uploaded successfully, please proceed to convert it. {upload_paths['latest']}")
     return render_template('index.html', form=form, form2=form2)
 
-@app.route('/convert', methods=['POST'])
-def convert(path):
-    form2 = ConvertFileForm()
-    if form2.validate_on_submit():
-        with open(path, 'r') as f:
-            content = f.read()
-            print(content)
-
-
+@app.route('/convert', methods=['GET', 'POST'])
+def convert():
+    if request.method == "POST":
+        path = open(upload_paths['latest'], 'rb')
+        reader = PyPDF2.PdfReader(path)
+        print(len(reader.pages))
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
-    convert(upload_paths)
+    convert()
